@@ -1,40 +1,13 @@
-const wordss = ['happiness', 'sadness', 'sleep', 'school', 'lepidopterist'];
-const words = [{
-  word: 'happiness',
-  hint: 'a happy feeling'
-}, {
-  word: 'france',
-  hint: 'country in Europe'
-}, {
-  word: 'einstein',
-  hint: 'revolutionary 19th century physicist'
-}, {
-  word: 'hibernation',
-  hint: 'long sleep'
-}, {
-  word: 'library',
-  hint: 'house of books'
-}, {
-  word: 'chess',
-  hint: 'kings and queens, rooks and knights'
-},  {
-  word: 'house',
-  hint: 'house'
-},  {
-  word: 'lake',
-  hint: 'body of water surrounded by land'
-},  {
-  word: 'island',
-  hint: 'area of land surrounded by water'
-},  {
-  word: 'nigeria',
-  hint: 'giants of Africa'
-}, {
-  word: 'anime',
-  hint: 'Japanese comics'
-}]
+import { abc, words } from "./data/words.js";
+import { handleDarkMode } from "./utils/dark-mode.js";
+import { shuffleArray } from "./utils/shuffle-array.js";
 
-const abc = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+handleDarkMode()  
+
+document.querySelector('.more-hints-button').addEventListener('click', () => {
+  document.querySelector('.action-buttons').classList.toggle('active')
+})
+
 
 let emptyBoxes = document.querySelector('.empty-boxes');
 let letterBoxes = document.querySelector('.letters');
@@ -43,56 +16,71 @@ let hintElem = document.querySelector('.hint');
 
 
 const randomWord = (words[Math.floor(Math.random() * words.length)]).word
-console.log(randomWord)
 const arrayOfLetters = [];
+
 for (const letter in randomWord){
   arrayOfLetters.push(randomWord[letter])
 }
+
 for (let i = 0; i < (randomWord.length)/2; i++){
   arrayOfLetters.push(abc[Math.floor(Math.random() * abc.length)])
 }
 
-(shuffleArray(arrayOfLetters)).map(letter => {
-  letterBoxes.innerHTML += `<span draggable="true">${letter}</span>`
+(shuffleArray(arrayOfLetters)).map((letter, index) => {
+  letterBoxes.innerHTML += `<span draggable="true" id="draggable-letter draggable-letter-${index}">${letter}</span>`
 })
+
 for (let i = 0; i < randomWord.length; i++){
-  emptyBoxes.innerHTML += `<span></span>`
+  emptyBoxes.innerHTML += `<span id='drop-zone drop-zone-${i}'></span>`
 }
+
 words.filter((word) => {
   if (word.word == randomWord){
     hintElem.innerHTML = `Hint: ${word.hint}`;
   }
 })
 
-
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-      // Generate a random index from 0 to i
-      const j = Math.floor(Math.random() * (i + 1));
-
-      // Swap elements at indices i and j
-      [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array; // Return the shuffled array (optional)
-}
-
-let isDarkMode
-document.querySelector('.dark-mode-button').addEventListener('click', () => {
-  isDarkMode = document.body.classList.toggle('dark')
-  console.log(isDarkMode)
-  localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
+const letterTiles = emptyBoxes.querySelectorAll('span');
+letterTiles.forEach(tile => {
+  tile.addEventListener('dragstart', dragStart);
+  tile.addEventListener('dragend', dragEnd)
 })
 
-isDarkMode = JSON.parse(localStorage.getItem('isDarkMode'));
-if (!isDarkMode) {
-  document.body.classList.remove('dark')
-} else {
-  document.body.classList.add('dark')
-}
-
-
-
-
-document.querySelector('.more-hints-button').addEventListener('click', () => {
-  document.querySelector('.action-buttons').classList.toggle('active')
+const dropArea = letterBoxes.querySelectorAll('span');
+console.log(dropArea)
+dropArea.forEach(area => {
+  area.addEventListener('dragover', (e) => {
+    e.preventDefault()
+  })
+  area.addEventListener('dragenter', dragEnter)
+  area.addEventListener('dragleave', dragLeave)
+  area.addEventListener('drop', drop)
 })
+
+function dragStart (e) {
+  e.dataTransfer.setData('text/plain', e.target.id);
+  setTimeout(() =>{
+    e.target.classList.add('hide');
+  }, 0)
+}
+function dragEnd (e) {
+  e.target.classList.remove('hide');
+}
+function dragOver (e) {
+  e.preventDefault();
+}
+function dragEnter (e) {
+  e.preventDefault();
+  // area.classList.add('hover');
+}
+function dragLeave () {
+  // area.classList.remove('hover');
+}
+function drop (e) {
+  e.preventDefault();
+  // area.classList.remove('hover');
+
+  const droppedLetterId = e.dataTransfer.getData('text/plain');
+  const droppedLetter = document.getElementById(droppedLetterId);
+  // area.innerHTML = droppedLetter.innerHTML;
+}

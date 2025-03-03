@@ -1,7 +1,19 @@
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url(/SpaceGrotesk-2.0.0/ttf/SpaceGrotesk[wght].ttf);
+}
 body{
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: 'Space Grotesk';
   background: #cde7ff;
   padding: 10px;
+  /* background: 
+    url(/images/pattern-squiggly-line-top.svg) top right no-repeat,
+    url(/images/pattern-lines.svg) no-repeat,
+    url(/images/pattern-circle.svg) no-repeat top left,
+    url(/images/pattern-circle.svg) no-repeat 75% 60%,
+    url(/images/pattern-squiggly-line-bottom-desktop.svg) no-repeat bottom left,
+    url(/images/background-desktop.png) 100% 0/ 100% 100% no-repeat ; */
 }
 body.dark{
   /* background: #00355b; */
@@ -18,6 +30,26 @@ body.dark main{
   /* background: #04395f; */
   background: transparent;
   backdrop-filter: blur(10px) brightness(1.3);
+}
+header{
+  display: flex;
+  justify-content: space-between;
+  margin: 0   20px;
+  padding-bottom: 10px;
+  position: relative;
+  align-items: center;
+}
+header::after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: rgba(56, 1, 102, 0.603);
+  bottom: 0;
+  left: 0;
+}
+.logo{
+  transform: scale(0.8);
 }
 main{
   max-width: 600px;
@@ -59,6 +91,10 @@ body.dark .action-buttons button, body.dark .hint{
   color: white;
   background: #1a8ea0;
   cursor: pointer;
+}
+body.dark .more-hints-button:hover{
+  background: #00d4d4;
+  color: black;
 }
 .empty-boxes span, .letters span{
   width: 35px;
@@ -151,4 +187,3 @@ body.dark .dark-mode-icon{
     font-size: 20px;
   }
 }
-
