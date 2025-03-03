@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Space Grotesk';
-  src: url(/SpaceGrotesk-2.0.0/ttf/SpaceGrotesk[wght].ttf);
+  src: url(./SpaceGrotesk-2.0.0/ttf/SpaceGrotesk[wght].ttf);
 }
 body{
   /* font-family: Arial, Helvetica, sans-serif; */
@@ -19,12 +19,12 @@ body.dark{
   /* background: #00355b; */
   color: #c2c2c2de;
   background: 
-    url(/images/pattern-squiggly-line-top.svg) top right no-repeat,
-    url(/images/pattern-lines.svg) no-repeat,
-    url(/images/pattern-circle.svg) no-repeat top left,
-    url(/images/pattern-circle.svg) no-repeat 75% 60%,
-    url(/images/pattern-squiggly-line-bottom-desktop.svg) no-repeat bottom left,
-    url(/images/background-desktop.png) 100% 0/ 100% 100% no-repeat ;
+    url(./images/pattern-squiggly-line-top.svg) top right no-repeat,
+    url(./images/pattern-lines.svg) no-repeat,
+    url(./images/pattern-circle.svg) no-repeat top left,
+    url(./images/pattern-circle.svg) no-repeat 75% 60%,
+    url(./images/pattern-squiggly-line-bottom-desktop.svg) no-repeat bottom left,
+    url(./images/background-desktop.png) 100% 0/ 100% 100% no-repeat ;
 }
 body.dark main{
   /* background: #04395f; */
