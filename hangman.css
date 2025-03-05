@@ -55,7 +55,7 @@ main{
   min-height: 60vh;
   background: transparent;
   backdrop-filter: blur(10px) brightness(1.05);
-  -webkit-backdrop-filter: blur(10px) brightness(1.05);
+  -webkit-backdrop-filter: blur(10px) brightness(1.09);
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -173,6 +173,9 @@ body.dark .dark-mode-button{
 }
 .dark-mode-icon{
   transition: 0.15s;
+}
+.dark-mode-icon{
+  color: black;
 }
 body.dark .dark-mode-icon{
   color: white;
