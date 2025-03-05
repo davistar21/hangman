@@ -55,6 +55,7 @@ main{
   min-height: 60vh;
   background: transparent;
   backdrop-filter: blur(10px) brightness(1.05);
+  -webkit-backdrop-filter: blur(10px) brightness(1.05);
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
