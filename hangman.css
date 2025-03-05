@@ -7,13 +7,10 @@ body{
   font-family: 'Space Grotesk', Arial;
   background: #cde7ff;
   padding: 10px;
-  /* background: 
-    url(/images/pattern-squiggly-line-top.svg) top right no-repeat,
-    url(/images/pattern-lines.svg) no-repeat,
-    url(/images/pattern-circle.svg) no-repeat top left,
-    url(/images/pattern-circle.svg) no-repeat 75% 60%,
-    url(/images/pattern-squiggly-line-bottom-desktop.svg) no-repeat bottom left,
-    url(/images/background-desktop.png) 100% 0/ 100% 100% no-repeat ; */
+  background:
+    linear-gradient(135deg, rgba(5, 100, 120, 0.373), #ffffff67, #ffffff67, #0770855f),
+    url(./images/pattern-squiggly-line-bottom-desktop.svg) no-repeat bottom left,
+    url(./images/light-background.jfif) 100% 0/ 100% 100% no-repeat
 }
 body.dark{
   /* background: #00355b; */
@@ -35,7 +32,7 @@ body.dark main{
 header{
   display: flex;
   justify-content: space-between;
-  margin: 0   20px;
+  margin: 0 20px;
   padding-bottom: 10px;
   position: relative;
   align-items: center;
@@ -56,7 +53,8 @@ main{
   max-width: 600px;
   margin: 30px auto;
   min-height: 60vh;
-  background: white;
+  background: transparent;
+  backdrop-filter: blur(10px) brightness(1.05);
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -101,6 +99,7 @@ body.dark .more-hints-button:hover{
   width: 35px;
   height: 50px;
   display: inline-block;
+  vertical-align: middle;
   text-align: center;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.45), 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
   margin: 10px 5px;
@@ -187,4 +186,7 @@ body.dark .dark-mode-icon{
     height: 40px;
     font-size: 20px;
   }
+}
+.hide{
+  display: none;
 }

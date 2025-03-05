@@ -27,11 +27,11 @@ for (let i = 0; i < (randomWord.length)/2; i++){
 }
 
 (shuffleArray(arrayOfLetters)).map((letter, index) => {
-  letterBoxes.innerHTML += `<span draggable="true" id="draggable-letter draggable-letter-${index}">${letter}</span>`
+  letterBoxes.innerHTML += `<span draggable="true" class="draggable-letter" id="draggable-letter-${index} ">${letter}</span>`
 })
 
 for (let i = 0; i < randomWord.length; i++){
-  emptyBoxes.innerHTML += `<span id='drop-zone drop-zone-${i}'></span>`
+  emptyBoxes.innerHTML += `<span class="drop-zone" id='drop-zone-${i}'></span>`
 }
 
 words.filter((word) => {
@@ -40,18 +40,16 @@ words.filter((word) => {
   }
 })
 
-const letterTiles = emptyBoxes.querySelectorAll('span');
+console.log(letterBoxes, emptyBoxes)
+const letterTiles = letterBoxes.querySelectorAll('span');
 letterTiles.forEach(tile => {
   tile.addEventListener('dragstart', dragStart);
   tile.addEventListener('dragend', dragEnd)
 })
 
-const dropArea = letterBoxes.querySelectorAll('span');
-console.log(dropArea)
-dropArea.forEach(area => {
-  area.addEventListener('dragover', (e) => {
-    e.preventDefault()
-  })
+const dropZones = emptyBoxes.querySelectorAll('span');
+dropZones.forEach(area => {
+  area.addEventListener('dragover', dragOver)
   area.addEventListener('dragenter', dragEnter)
   area.addEventListener('dragleave', dragLeave)
   area.addEventListener('drop', drop)
@@ -82,5 +80,10 @@ function drop (e) {
 
   const droppedLetterId = e.dataTransfer.getData('text/plain');
   const droppedLetter = document.getElementById(droppedLetterId);
-  // area.innerHTML = droppedLetter.innerHTML;
+  if (droppedLetter) {
+    e.target.innerHTML = ''; // Clear previous content
+    e.target.appendChild(droppedLetter); // Move letter to drop area
+    // e.target.innerHTML = droppedLetter.innerHTML
+    console.log(e.target)
+  }
 }
